@@ -1,4 +1,55 @@
-# Tutorial Writer Skill
+# My Awesome Prompts and Skills
+
+这是我日常使用、整理和迭代的一组 prompts 与 Codex skills。
+
+这个仓库不是单篇教程，也不是某一个 skill 的说明页，而是一个索引型仓库：每个目录对应一个可复用的 prompt、skill 或相关资源。后续新增内容时，先在这里登记用途、适用场景和入口文件，方便自己和他人快速找到能用的东西。
+
+## 仓库内容
+
+目前包含：
+
+| 名称 | 类型 | 用途 | 入口 |
+| --- | --- | --- | --- |
+| Tutorial Writer | Codex skill | 基于公众号文章、博客、官方文档或已有教程，撰写、扩充、审阅和润色中文教程 | [`tutorial-writer/SKILL.md`](tutorial-writer/SKILL.md) |
+
+## 使用方式
+
+### 使用 Codex skill
+
+把需要使用的 skill 目录复制到 Codex skills 目录：
+
+```powershell
+Copy-Item -Recurse .\tutorial-writer "$env:USERPROFILE\.codex\skills\"
+```
+
+安装后，新会话或重启 Codex 通常即可通过 `$skill-name` 调用。例如：
+
+```text
+Use $tutorial-writer 基于下面几篇文章，写一篇 Codex 从入门到进阶的教程。
+```
+
+### 直接参考 prompt 或说明
+
+如果某个目录不是 skill，而是 prompt 或说明文档，可以直接打开对应 Markdown 文件复制、改写或作为工作流参考。
+
+## 目录约定
+
+每个条目尽量保持独立，通常包含：
+
+```text
+name/
+├── SKILL.md              # Codex skill 的核心说明，若该条目是 skill
+├── README.md             # 可选，面向人类读者的更详细说明
+├── agents/               # 可选，Codex UI 元数据
+├── references/           # 可选，工作流中按需读取的参考材料
+└── assets/               # 可选，模板、图片或其他资源
+```
+
+根目录 README 只做总览和索引；具体工作流、使用细节和维护说明放在各自目录里。
+
+## 索引
+
+### Tutorial Writer
 
 `tutorial-writer` 是一个 Codex skill，用来把微信公众号文章、技术博客、官方文档或已有教程，整理成更适合学习的中文教程。
 
@@ -11,9 +62,7 @@
 
 目标读者默认是有一定基础的本科生、研究生或程序员。写作风格偏务实，不绕弯，但关键概念会用更容易理解的方式解释。
 
-## 工作流程
-
-这个 skill 按四步工作：
+工作流程：
 
 1. **读**：进入用户提供的链接，通读原文，提取关键步骤、概念、版本、环境假设和作者经验。
 2. **写**：重新组织材料，把原文内容改写成从低难度到高难度的教程。
@@ -22,42 +71,7 @@
 
 如果公众号文章、博客或文档页面无法读取，skill 会要求用户提供原文、导出的 Markdown/HTML/PDF 或截图，不会只根据标题脑补内容。
 
-## 支持的工作模式
-
-### 从 0 到 1 写教程
-
-用户提供文章链接后，skill 会先读原文，再重排成清晰教程。
-
-示例：
-
-```text
-Use $tutorial-writer 基于下面几篇公众号文章，写一篇 Codex 新手到进阶教程。
-链接：
-- ...
-- ...
-```
-
-### 从 1 到 n 扩充教程
-
-用户提供已有教程和新链接后，skill 会判断哪些内容需要补充、更新或重排，而不是默认推倒重写。
-
-示例：
-
-```text
-Use $tutorial-writer 用这些新文章更新我现有的 WSL2 教程，保留原来的结构，补充过时部分。
-```
-
-### 全面审阅教程是否过时
-
-用户不提供新链接时，skill 会主动搜索官方资料和近期资料，检查安装命令、版本说明、功能边界、平台限制等是否需要更新。
-
-示例：
-
-```text
-Use $tutorial-writer 全面审阅这篇 Ubuntu 使用教程，检查是否有过时内容，并直接改成最新版。
-```
-
-## 目录结构
+目录：
 
 ```text
 tutorial-writer/
@@ -68,28 +82,21 @@ tutorial-writer/
     └── style-checklist.md
 ```
 
-- `SKILL.md`：核心工作流，定义读、写、验、润四个阶段。
-- `references/style-checklist.md`：最终润色检查表，重点去掉 AI 味、空话和机械结构。
-- `agents/openai.yaml`：Codex UI 展示元数据。
+文件说明：
 
-## 安装方式
+- [`tutorial-writer/SKILL.md`](tutorial-writer/SKILL.md)：核心工作流，定义读、写、验、润四个阶段。
+- [`tutorial-writer/references/style-checklist.md`](tutorial-writer/references/style-checklist.md)：最终润色检查表，重点去掉 AI 味、空话和机械结构。
+- [`tutorial-writer/agents/openai.yaml`](tutorial-writer/agents/openai.yaml)：Codex UI 展示元数据。
 
-把 `tutorial-writer` 文件夹复制到 Codex skills 目录：
+示例：
 
-```powershell
-Copy-Item -Recurse .\tutorial-writer "$env:USERPROFILE\.codex\skills\"
+```text
+Use $tutorial-writer 基于下面几篇公众号文章，写一篇 Codex 新手到进阶教程。
 ```
 
-安装后，新会话或重启 Codex 通常即可通过 `$tutorial-writer` 调用。
+## 维护原则
 
-## 设计原则
-
-- 教程必须基于实际读过的来源，不根据标题或搜索摘要编造。
-- 快速变化的主题必须查官方资料或最新可信资料。
-- 教程顺序要符合学习路径：先跑通，再理解，再扩展。
-- 关键概念可以类比，一般技巧直接说清楚即可。
-- 最终文字要高效、务实、通俗，但不要像产品宣传稿。
-
-## 验证状态
-
-本仓库中的 skill 已通过 Codex `skill-creator` 的 `quick_validate.py` 校验。
+- 新增 prompt 或 skill 时，同步更新本 README 的索引。
+- 每个 skill 应保留清晰的入口文件和最小必要资源。
+- 能验证就验证，不把未验证的工作流写成已可用。
+- 快速变化的工具类内容，应优先查官方文档和最新发布说明。
