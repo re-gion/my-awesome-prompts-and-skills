@@ -75,6 +75,10 @@ Prefer this tutorial shape unless the user asks for another format:
 
 For "from 1 to n" updates, read the existing tutorial first, identify what the new sources add, then patch the tutorial instead of rewriting everything by default. Preserve useful voice, examples, headings, and learner progression unless they block correctness.
 
+When adding new sources to an existing tutorial, append them sequentially to the existing source/reference list. Do not create a separate "sources added in this update" subsection unless the user explicitly asks for changelog-style source tracking. These tutorials are living documents; sources should read as one continuous bibliography.
+
+Maintain a stable public-reader perspective. If the tutorial uses second person ("你") to teach the reader, reserve that pronoun for the reader only. When adding the author's own configuration, machine-specific experience, or historical troubleshooting, refer to it as "笔者实测", "作者环境", "一组实测配置", or "我在实践中遇到的问题" instead of "你这台电脑" or "你的配置". This prevents ambiguity between the reader's machine and the author's machine. When possible, corroborate author-specific bugs or platform issues with public sources such as official docs, changelogs, GitHub issues, or community reports, so the tutorial does not imply that every reader will see the same local failure.
+
 ### 3. Verify
 
 After drafting, check whether the tutorial is current and correct.
