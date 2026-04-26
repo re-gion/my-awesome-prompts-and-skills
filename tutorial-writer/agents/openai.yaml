@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tutorial Writer"
+  short_description: "Source-based tutorials with freshness review"
+  default_prompt: "Use $tutorial-writer to turn the provided article links into a practical, up-to-date tutorial."
